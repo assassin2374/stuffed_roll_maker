@@ -1,4 +1,4 @@
 export type Stuff = {
-  role: string;
+  role?: string;
   name: string;
 };
