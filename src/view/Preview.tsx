@@ -4,18 +4,22 @@ import { useEffect, useState } from "react";
 
 const sampleStuffRoll: Stuff[] = [
   {
+    id: 1,
     role: "主演",
     name: "松本倖",
   },
   {
+    id: 2,
     role: "脚本",
     name: "松本倖",
   },
   {
+    id: 3,
     role: "演出",
     name: "松本倖",
   },
   {
+    id: 4,
     role: "Special thanks to",
     name: "You",
   },
@@ -36,10 +40,10 @@ const Preview: React.FC = () => {
     };
   }, []);
 
-  const countUp = () => {
-    setCount(count + 1);
-    return count;
-  };
+  // const countUp = () => {
+  //   setCount(count + 1);
+  //   return count;
+  // };
 
   return (
     <div
@@ -53,7 +57,7 @@ const Preview: React.FC = () => {
       <div style={{ position: "absolute", top: roll }}>
         {sampleStuffRoll.map((stuff) => {
           return (
-            <div key={countUp()}>
+            <div key={stuff.id}>
               <div style={{ fontSize: 50, color: "red" }}>
                 {stuff.role} {stuff.name}
               </div>
