@@ -26,24 +26,19 @@ const sampleStuffRoll: Stuff[] = [
 ];
 
 const Preview: React.FC = () => {
-  const [roll, setRoll] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
+  // 初期値は開始時の高さになるので
+  const [roll, setRoll] = useState<number>(-200);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRoll((roll) => {
         return roll + 1;
       });
-    }, 100);
+    }, 50);
     return () => {
       return clearInterval(interval);
     };
   }, []);
-
-  // const countUp = () => {
-  //   setCount(count + 1);
-  //   return count;
-  // };
 
   return (
     <div

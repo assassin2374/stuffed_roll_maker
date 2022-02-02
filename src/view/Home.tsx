@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
+// import { useHistory } from "react-router-dom";
 import { Stuff } from "../model/stuff";
 import { styled } from "@mui/material/styles";
 import Button, { ButtonProps } from "@mui/material/Button";
@@ -12,7 +13,7 @@ const PreviewButton = styled(Button)<ButtonProps>(() => {
   };
 });
 
-const producer: Stuff = { role: "製作者", name: "松本倖" };
+const producer: Stuff = { id: 1, role: "製作者", name: "松本倖" };
 
 const Home: React.FC = () => {
   const [stuff, setStuff] = useState<Stuff>(producer);
@@ -31,13 +32,23 @@ const Home: React.FC = () => {
   };
 
   const addStuff = async () => {
-    const newStuffList = { ...stuffList };
+    const newId = stuff.id + 1;
+    const newStuffList = [...stuffList];
+
+    // Stuffを更新
     const newStuff: Stuff = {
+      id: newId,
       role: stuffRole,
       name: stuffName,
     };
     setStuff(newStuff);
+
+    // StuffListを更新
+    newStuffList.push(newStuff);
     setStuffList(newStuffList);
+    console.info(stuffList);
+
+    // ページ遷移
   };
 
   return (
@@ -70,13 +81,10 @@ const Home: React.FC = () => {
         プレビュー
       </PreviewButton>
       <div>
-        {stuff.role}:{stuff.name}
-      </div>
-      <div>
         stuffList
         {stuffList.map((stuff) => {
           return (
-            <div key={stuff.name}>
+            <div key={stuff.id}>
               {stuff.role}:{stuff.name}
             </div>
           );
