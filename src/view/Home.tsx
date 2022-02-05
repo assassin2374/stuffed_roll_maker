@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Stuff } from "../model/stuff";
 import { styled } from "@mui/material/styles";
 import Button, { ButtonProps } from "@mui/material/Button";
@@ -20,6 +20,8 @@ const Home: React.FC = () => {
   const [stuffRole, setStuffRole] = useState("");
   const [stuffName, setStuffName] = useState("");
   const [stuffList, setStuffList] = useState<Stuff[]>([producer]);
+
+  const navigate = useNavigate();
 
   const addStuffRole = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newStuffRole: string = e.target.value;
@@ -49,6 +51,7 @@ const Home: React.FC = () => {
     console.info(stuffList);
 
     // ページ遷移
+    navigate("/Preview");
   };
 
   return (

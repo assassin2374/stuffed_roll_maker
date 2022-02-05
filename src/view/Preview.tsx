@@ -52,20 +52,10 @@ const Preview: React.FC = () => {
       <div style={{ position: "absolute", top: roll }}>
         {sampleStuffRoll.map((stuff) => {
           return (
-            <div key={stuff.id}>
+            <div key={stuff.id} style={{ height: 200 }}>
               <div style={{ fontSize: 50, color: "red" }}>
                 {stuff.role} {stuff.name}
               </div>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
             </div>
           );
         })}
