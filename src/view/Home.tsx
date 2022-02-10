@@ -15,7 +15,7 @@ const PreviewButton = styled(Button)<ButtonProps>(() => {
 
 const producer: Stuff = { id: 1, role: "製作者", name: "松本倖" };
 
-const Home: React.FC = () => {
+const Home = () => {
   const [stuff, setStuff] = useState<Stuff>(producer);
   const [stuffRole, setStuffRole] = useState("");
   const [stuffName, setStuffName] = useState("");
@@ -49,9 +49,11 @@ const Home: React.FC = () => {
     newStuffList.push(newStuff);
     setStuffList(newStuffList);
     console.info(stuffList);
+  };
 
+  const preview = async () => {
     // ページ遷移
-    navigate("/Preview");
+    navigate("/Preview", { state: { list: stuffList } });
   };
 
   return (
@@ -80,6 +82,14 @@ const Home: React.FC = () => {
         color="primary"
         size="large"
         onClick={addStuff}
+      >
+        追加
+      </PreviewButton>
+      <PreviewButton
+        variant="contained"
+        color="success"
+        size="large"
+        onClick={preview}
       >
         プレビュー
       </PreviewButton>

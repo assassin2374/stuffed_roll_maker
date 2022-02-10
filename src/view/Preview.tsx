@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Stuff } from "../model/stuff";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const sampleStuffRoll: Stuff[] = [
   {
@@ -25,16 +26,25 @@ const sampleStuffRoll: Stuff[] = [
   },
 ];
 
-const Preview: React.FC = () => {
-  // 初期値は開始時の高さになるので
-  const [roll, setRoll] = useState<number>(-200);
+const Preview = () => {
+  const location = useLocation();
+  const [allStuff, setAllStuff] = useState<{ list: Stuff[] }>(
+    location.state as { list: Stuff[] }
+  );
+  // StuffList全体の高さ
+  const height = allStuff.list.length * -200;
+  // StuffListの中央値
+  const width = window.innerWidth / 2;
+
+  // 初期値は開始時の高さになる
+  const [roll, setRoll] = useState<number>(height);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRoll((roll) => {
         return roll + 1;
       });
-    }, 50);
+    }, 25);
     return () => {
       return clearInterval(interval);
     };
@@ -49,11 +59,17 @@ const Preview: React.FC = () => {
         margin: 0,
       }}
     >
-      <div style={{ position: "absolute", top: roll }}>
-        {sampleStuffRoll.map((stuff) => {
+      <div style={{ position: "absolute", top: roll, left: width }}>
+        {allStuff.list.map((stuff) => {
           return (
             <div key={stuff.id} style={{ height: 200 }}>
-              <div style={{ fontSize: 50, color: "red" }}>
+              <div
+                style={{
+                  fontSize: 50,
+                  color: "red",
+                  fontFamily: "ヒラギノ明朝 ProN",
+                }}
+              >
                 {stuff.role} {stuff.name}
               </div>
             </div>
