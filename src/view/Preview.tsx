@@ -26,6 +26,12 @@ const sampleStuffRoll: Stuff[] = [
   },
 ];
 
+const sampleStuff: Stuff = {
+  id: 1,
+  role: "主演",
+  name: "松本倖",
+};
+
 const Preview = () => {
   const location = useLocation();
   const [allStuff, setAllStuff] = useState<{ list: Stuff[] }>(
@@ -34,7 +40,12 @@ const Preview = () => {
   // StuffList全体の高さ
   const height = allStuff.list.length * -200;
   // StuffListの中央値
-  const width = window.innerWidth / 2;
+  const width = 0;
+
+  // 文字列バイト
+  const byte = encodeURI(sampleStuff.name).replace(/%../g, "*").length;
+  // 文字数
+  const byteNum = sampleStuff.name.length;
 
   // 初期値は開始時の高さになる
   const [roll, setRoll] = useState<number>(height);
@@ -50,6 +61,18 @@ const Preview = () => {
     };
   }, []);
 
+  const widthAdjustment = (stuff: Stuff) => {
+    const nameCount = stuff.name.length;
+    let roleCount = 0;
+    if (stuff.role) {
+      roleCount = stuff.role.length;
+    }
+
+    console.warn(width, nameCount, roleCount);
+    const wordCount = (nameCount + roleCount) * 50;
+    return wordCount;
+  };
+
   return (
     <div
       style={{
@@ -59,14 +82,28 @@ const Preview = () => {
         margin: 0,
       }}
     >
-      <div style={{ position: "absolute", top: roll, left: width }}>
+      <div
+        style={{
+          position: "absolute",
+          top: roll,
+          left: width,
+          width: window.innerWidth,
+          textAlign: "center",
+        }}
+      >
         {allStuff.list.map((stuff) => {
           return (
-            <div key={stuff.id} style={{ height: 200 }}>
+            <div
+              key={stuff.id}
+              style={{
+                right: widthAdjustment(stuff), //max427
+                height: 200,
+              }}
+            >
               <div
                 style={{
                   fontSize: 50,
-                  color: "red",
+                  color: "white",
                   fontFamily: "ヒラギノ明朝 ProN",
                 }}
               >
