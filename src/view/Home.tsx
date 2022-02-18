@@ -5,6 +5,11 @@ import { Stuff } from "../model/stuff";
 import { styled } from "@mui/material/styles";
 import Button, { ButtonProps } from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 const PreviewButton = styled(Button)<ButtonProps>(() => {
   return {
