@@ -98,16 +98,16 @@ const Home = () => {
       >
         プレビュー
       </PreviewButton>
-      <div>
+      <List>
         stuffList
         {stuffList.map((stuff) => {
           return (
-            <div key={stuff.id}>
-              {stuff.role}:{stuff.name}
-            </div>
+            <ListItem key={stuff.id}>
+              <ListItemText primary={`${stuff.role}:${stuff.name}`} />
+            </ListItem>
           );
         })}
-      </div>
+      </List>
     </>
   );
 };
