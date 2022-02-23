@@ -1,36 +1,7 @@
 import * as React from "react";
 import { Stuff } from "../model/stuff";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
-const sampleStuffRoll: Stuff[] = [
-  {
-    id: 1,
-    role: "主演",
-    name: "松本倖",
-  },
-  {
-    id: 2,
-    role: "脚本",
-    name: "松本倖",
-  },
-  {
-    id: 3,
-    role: "演出",
-    name: "松本倖",
-  },
-  {
-    id: 4,
-    role: "Special thanks to",
-    name: "You",
-  },
-];
-
-const sampleStuff: Stuff = {
-  id: 1,
-  role: "主演",
-  name: "松本倖",
-};
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Preview = () => {
   const location = useLocation();
@@ -42,17 +13,20 @@ const Preview = () => {
   // StuffListの中央値
   const width = 0;
 
-  // 文字列バイト
-  const byte = encodeURI(sampleStuff.name).replace(/%../g, "*").length;
-  // 文字数
-  const byteNum = sampleStuff.name.length;
+  const vhheight = window.parent.screen.height;
 
   // 初期値は開始時の高さになる
   const [roll, setRoll] = useState<number>(height);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const interval = setInterval(() => {
       setRoll((roll) => {
+        if (roll >= vhheight) {
+          // ページ遷移
+          navigate("/");
+        }
         return roll + 1;
       });
     }, 25);
