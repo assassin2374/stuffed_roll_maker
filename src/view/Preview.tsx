@@ -33,7 +33,7 @@ const Preview = () => {
     return () => {
       return clearInterval(interval);
     };
-  }, []);
+  });
 
   const widthAdjustment = (stuff: Stuff) => {
     const nameCount = stuff.name.length;
