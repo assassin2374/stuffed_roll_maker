@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const Preview = () => {
   const location = useLocation();
-  const [allStuff, setAllStuff] = useState<{ list: Stuff[] }>(
+  const [allStuff] = useState<{ list: Stuff[] }>(
     location.state as { list: Stuff[] }
   );
   // StuffList全体の高さ
